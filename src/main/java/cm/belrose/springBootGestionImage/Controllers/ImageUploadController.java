@@ -12,6 +12,7 @@ import cm.belrose.springBootGestionImage.entities.ImageModel;
 import cm.belrose.springBootGestionImage.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -52,5 +53,16 @@ public class ImageUploadController {
     @GetMapping(path = {"/get/{imageName}"})
     public ImageModel getImageInBD(@PathVariable("imageName") String imageName) throws IOException {
         return imageService.getImageInBD(imageName).get();
+    }
+
+    /**
+     *
+     * @param imageName
+     * @return
+     * @throws Exception
+     */
+    @GetMapping(path = {"/get1/{imageName}"},produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getImageInDiractory(@PathVariable("imageName") String imageName) throws Exception {
+        return imageService.getImageInDirectory(imageName);
     }
 }

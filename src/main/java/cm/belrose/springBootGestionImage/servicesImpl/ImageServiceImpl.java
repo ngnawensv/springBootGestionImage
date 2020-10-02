@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
@@ -27,13 +31,30 @@ public class ImageServiceImpl implements ImageService {
         ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()));
         imageDao.save(img);
     }
-
     @Override
     public Optional<ImageModel> getImageInBD(String imageName) throws IOException {
         ImageModel retrievedImage = imageDao.findByName(imageName).get();
         ImageModel img = new ImageModel(retrievedImage.getName(), retrievedImage.getType(), decompressBytes(retrievedImage.getPicByte()));
         return Optional.of(img);
     }
+
+
+    /**
+     * With this method we get the image which is storing in directory
+     * @param imageName
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public byte[] getImageInDirectory(String imageName) throws Exception {
+        //ImageModel imageModel= imageDao.findById(id).get();
+        //String imageName=imageModel.getName();
+        System.out.println("imageName "+imageName);
+        File file=new File(System.getProperty("user.home")+"/Pictures/"+imageName);
+        Path path= Paths.get(file.toURI());
+        return Files.readAllBytes(path);
+    }
+
 
 
     /**

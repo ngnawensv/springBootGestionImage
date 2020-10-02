@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface ImageService {
     public void saveImageInBD(MultipartFile file) throws IOException;
     public Optional<ImageModel> getImageInBD(String imageName) throws IOException;
+    //public byte[] getImageInDirectory(Long id) throws Exception;
+    public byte[] getImageInDirectory(String imageName) throws Exception;
 }
