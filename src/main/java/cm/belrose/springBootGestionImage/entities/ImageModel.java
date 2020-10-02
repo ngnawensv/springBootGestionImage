@@ -2,6 +2,10 @@ package cm.belrose.springBootGestionImage.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
+/**
+ * @author Ngnawen Samuel
+ */
 @Entity
 @Table(name = "image_table")
 public class ImageModel implements Serializable {

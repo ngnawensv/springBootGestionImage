@@ -3,6 +3,10 @@ package cm.belrose.springBootGestionImage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author Ngnawen Samuel
+ */
+
 @SpringBootApplication
 public class SpringBootGestionImageApplication {
 
